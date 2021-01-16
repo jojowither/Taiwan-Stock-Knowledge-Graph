@@ -1,2 +1,3 @@
 .python-version
 .DS_Store
+src/ghostdriver.log
