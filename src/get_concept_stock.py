@@ -9,8 +9,7 @@ from selenium.webdriver.support.ui import Select
 from tqdm import tqdm
 
 CHROMEDRIVER_PATH = '/usr/local/bin/chromedriver'
-# pchome股市概念股
-CONCEPT_STCOK_URL = 'https://pchome.megatime.com.tw/group/sto3'
+CONCEPT_STCOK_URL = 'https://pchome.megatime.com.tw/group/sto3'  # pchome股市概念股
 
 ALL_CONCEPT_XPATH = '//*[@id="bttb"]/table/tbody/tr/td/div[2]'
 SELECT_XPATH = '//*[@id="bttb"]/div[5]/select'
@@ -31,6 +30,17 @@ def get_all_concept(driver):
     concepts = driver.find_element_by_xpath(ALL_CONCEPT_XPATH)
     concepts = concepts.text.split('\n')
     return concepts
+
+
+def click_concept_button(concept_idx, driver):
+    concepts_xpath = f'{ALL_CONCEPT_XPATH}/span[{concept_idx}]/a'
+    cur_url = driver.current_url
+    # wait the driver to click button
+    while True:
+        driver.find_element_by_xpath(concepts_xpath).click()
+        if driver.current_url != cur_url:
+            break
+    return concepts_xpath
 
 
 def get_all_subpages(driver, concepts_xpath):
@@ -66,19 +76,12 @@ def filter_code(stock):
 def main():
     driver = init_driver()
     concepts = get_all_concept(driver)
-    # create empty df
     concept_df = pd.DataFrame(columns=['concept', 'stock'])
 
     for concept_idx, concept in enumerate(tqdm(concepts, desc='Process',
                                                colour='#00af91'), start=1):
-        # click in to concept
-        concepts_xpath = f'{ALL_CONCEPT_XPATH}/span[{concept_idx}]/a'
-        cur_url = driver.current_url
-        while True:
-            driver.find_element_by_xpath(concepts_xpath).click()
-            if driver.current_url != cur_url:
-                break
 
+        concepts_xpath = click_concept_button(concept_idx, driver)
         select, subpages = get_all_subpages(driver, concepts_xpath)
         for page_idx, opt in enumerate(subpages):
             if page_idx != 0:
