@@ -2,6 +2,7 @@ import csv
 import hashlib
 import os
 from pathlib import Path
+import twstock
 
 
 def get_md5(string):
@@ -29,12 +30,15 @@ def build_person(executive_prep, person_import):
 
         headers = ['person_id:ID', 'name', ':LABEL']
         file_import_csv.writerow(headers)
+        person_set = set()
         for i, row in enumerate(file_prep_csv):
             if i == 0:
                 continue
+            person_set.add(row[0])
+        for person in person_set:
             # generate md5 according to 'name'
-            person_id = get_md5(row[0])
-            info = [person_id, row[0], 'Person']
+            person_id = get_md5(person)
+            info = [person_id, person, 'Person']
             file_import_csv.writerow(info)
     print('- done.')
 
@@ -236,6 +240,11 @@ def build_stock_concept(concept_prep, relation_import):
             concept = row[0]
             start_id = get_md5(concept)
             end_id = row[1]
+
+            # Maybe the twstock didn't update the new stcok
+            if end_id not in twstock.codes:
+                continue
+
             relation = [start_id, end_id, 'concept_of']
             file_import_csv.writerow(relation)
     print('- done.')
