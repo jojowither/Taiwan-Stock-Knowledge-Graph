@@ -95,7 +95,7 @@ def main():
         # driver.execute_script("window.history.go(-1)")
         driver.get(CONCEPT_STCOK_URL)
 
-    concept_df.to_csv('../data/concept_prep.csv', encoding='utf-8')
+    concept_df.to_csv('../data/concept_prep.csv', encoding='utf-8', index=False)
     print('\nDone')
 
 

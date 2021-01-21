@@ -45,7 +45,7 @@ def main():
                 executive_df = executive_df.append(
                     executive_dict, ignore_index=True)
 
-    executive_df.to_csv('../data/executive_prep.csv', encoding='utf-8')
+    executive_df.to_csv('../data/executive_prep.csv', encoding='utf-8', index=False)
     print('\nDone')
 
 

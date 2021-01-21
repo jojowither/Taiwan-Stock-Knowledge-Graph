@@ -22,7 +22,7 @@ def main():
                             'group': all_twstock_group,
                             'market': all_twstock_market,})
 
-    stock_df.to_csv('../data/tw_stock_info_prep.csv', encoding='utf-8')
+    stock_df.to_csv('../data/tw_stock_info_prep.csv', encoding='utf-8', index=False)
 
 
 if __name__ == "__main__":
