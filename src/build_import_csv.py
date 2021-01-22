@@ -237,12 +237,12 @@ def build_stock_concept(concept_prep, relation_import):
         for i, row in enumerate(file_prep_csv):
             if i == 0:
                 continue
+            start_id = row[1]
             concept = row[0]
-            start_id = get_md5(concept)
-            end_id = row[1]
+            end_id = get_md5(concept)
 
             # Maybe the twstock didn't update the new stcok
-            if end_id not in twstock.codes:
+            if start_id not in twstock.codes:
                 continue
 
             relation = [start_id, end_id, 'concept_of']
