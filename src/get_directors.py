@@ -19,6 +19,7 @@ def main():
     executive_df = pd.DataFrame(columns=['name', 'code', 'job', 'stock_num'])
 
     # 永豐金證券網頁
+    # 董監事經理人及大股東
     stock_web_url = 'https://www.sinotrade.com.tw/Stock/Stock_3_1/Stock_3_1_6_2?ticker='
 
     for twstock_code in tqdm(all_twstock_code, desc='Process', colour='#00af91'):
