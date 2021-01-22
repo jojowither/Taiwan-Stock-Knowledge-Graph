@@ -157,7 +157,7 @@ def build_person_stock(executive_prep, relation_import):
             open(relation_import, 'w', encoding='utf-8') as file_import:
         file_prep_csv = csv.reader(file_prep, delimiter=',')
         file_import_csv = csv.writer(file_import, delimiter=',')
-        headers = [':START_ID', 'jobs', 'stock_num', ':END_ID', ':TYPE']
+        headers = [':START_ID', 'jobs', 'stock_num:int', ':END_ID', ':TYPE']
         file_import_csv.writerow(headers)
 
         for i, row in enumerate(file_prep_csv):
