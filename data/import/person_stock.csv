@@ -1,4 +1,4 @@
-:START_ID,jobs,stock_num,:END_ID,:TYPE
+:START_ID,jobs,stock_num:int,:END_ID,:TYPE
 70bc0b69e4946da7ef732c59520b365d,總經理,1638,1240,employ_of
 88b694db472c61795d531cc11ba7df75,獨立董事,0,1240,employ_of
 722b20f8b609aafca207b28b245ba3cd,獨立董事,0,1240,employ_of
