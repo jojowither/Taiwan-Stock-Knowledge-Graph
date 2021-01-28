@@ -31,6 +31,12 @@ Welcome to watch, star or fork.
 - **industry_of**表示該股票屬於何種行業
 - **concept_of**表示該股票有哪些概念股
 
+查詢schema，啟動neo4j後
+```cypher
+CALL db.schema.visualization()
+```
+![](kg_schema.png)
+
 
 ---
 
@@ -130,4 +136,20 @@ cd $NEO4J_HOME/bin
 
 開啟`index.html`，記得把config改成自己的帳號密碼
 
+Stock size為Stock與概念股的pagerank，color為Stock與概念股的community detection
+
+Person sizePerson與Stock的pagerank，color為Person與Stock的community detection
+
+employ_of粗細為該董監持股數除以全部董監持股數
+
 ![](kg2.png)
+
+---
+
+## Reference
+
+- https://github.com/lemonhu/stock-knowledge-graph
+- https://towardsdatascience.com/graph-analytics-with-py2neo-f629ba71051b
+- https://github.com/neo4j-contrib/neovis.js
+- https://medium.com/neo4j/graph-visualization-with-neo4j-using-neovis-js-a2ecaaa7c379
+- https://www.lyonwj.com/blog/graph-of-thrones-neo4j-social-network-analysis
