@@ -116,3 +116,18 @@ cd $NEO4J_HOME/bin
 
 ## 使用Cypher於知識圖譜回答問題
 查看 `src/test.ipynb`
+
+---
+
+## 自定義視覺化
+[neovis](https://github.com/neo4j-contrib/neovis.js)
+
+執行neo4j後
+```bash
+cd $NEO4J_HOME/bin
+./neo4j console
+```
+
+開啟`index.html`，記得把config改成自己的帳號密碼
+
+![](kg2.png)
