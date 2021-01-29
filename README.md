@@ -50,7 +50,7 @@ python get_concept_stock.py
 ```
 
 
-以上三句是建構初始資料集，Neo4j需要再針對以上資料集生成對應的格式，可以理解為上面實體關聯關係圖的所有實體關聯，我們都要為他們建立一個檔案，上面實體關聯總共有9種，所以要有9個檔案。對於格式要求可以參考 https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/
+以上三句是建構初始資料集，Neo4j需要再針對以上資料集生成對應的格式，可以理解為上面實體關聯關係圖的所有實體關聯，我們都要為他們建立一個檔案，上面實體關聯總共有9種，所以要有9個檔案。對於格式要求可以參考 https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/
 
 
 建立Neo4j可接受的格式：
@@ -116,12 +116,20 @@ cd $NEO4J_HOME/bin
 
 `mydatabase`為我自己命名資料庫的名字，可以更改
 
+目前上傳的資料集差不多是在2021/1/21前後的資訊，如果需要最新資訊可以回到[資料集建構](##資料集建構)，去爬下最新的資料。
+
 **注意**，把`data/import`整個資料夾放到`$NEO4J_HOME/bin`裡，我自己是有再將資料夾重新命名為`stock`
 
 ---
 
 ## 使用Cypher於知識圖譜回答問題
 查看 `src/test.ipynb`
+
+
+```bash
+pip install python-igraph
+pip install py2neo
+```
 
 ---
 
@@ -138,7 +146,7 @@ cd $NEO4J_HOME/bin
 
 Stock size為Stock與概念股的pagerank，color為Stock與概念股的community detection
 
-Person sizePerson與Stock的pagerank，color為Person與Stock的community detection
+Person size為Person與Stock的pagerank，color為Person與Stock的community detection
 
 employ_of粗細為該董監持股數除以全部董監持股數
 
