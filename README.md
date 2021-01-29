@@ -144,7 +144,10 @@ cd $NEO4J_HOME/bin
 
 開啟`index.html`，記得把config改成自己的帳號密碼
 
-這裡自定義的視覺化為使用graph algorithms，只畫出股票及董事之間的關係，產生相關數值的code寫在`src/test.ipynb`後段。
+這裡自定義的視覺化為使用graph algorithms，只畫出股票及董事之間的關係。
+```bash
+python run_graph_algo.py
+```
 
 Stock size為Stock與概念股的pagerank，color為Stock與概念股的community detection
 
@@ -153,6 +156,7 @@ Person size為Person與Stock的pagerank，color為Person與Stock的community det
 employ_of粗細為該董監持股數除以全部董監持股數
 
 ![](kg2.png)
+![](kg3.png)
 
 ---
 
