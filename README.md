@@ -161,3 +161,8 @@ employ_of粗細為該董監持股數除以全部董監持股數
 - https://github.com/neo4j-contrib/neovis.js
 - https://medium.com/neo4j/graph-visualization-with-neo4j-using-neovis-js-a2ecaaa7c379
 - https://www.lyonwj.com/blog/graph-of-thrones-neo4j-social-network-analysis
+
+---
+
+## Acknowledgement
+感謝[adsl8212](https://github.com/adsl8212)協助爬蟲
