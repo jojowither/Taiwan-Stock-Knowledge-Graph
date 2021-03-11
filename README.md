@@ -111,7 +111,7 @@ and then visit `http://localhost:7474`，接著更改預設密碼
 
 ```bash
 cd $NEO4J_HOME/bin
-./neo4j-admin import --id-type=STRING --database=mydatabase --nodes stock/person.csv --nodes tock/stock.csv --nodes stock/stock_type.csv --nodes stock/concept.csv --nodes stock/industry.csv --relationships stock/person_stock.csv --relationships stock/stock_industry.csv --relationships stock/stock_concept.csv --relationships stock/stock_st.csv
+./neo4j-admin import --id-type=STRING --database=mydatabase --nodes stock/person.csv --nodes stock/stock.csv --nodes stock/stock_type.csv --nodes stock/concept.csv --nodes stock/industry.csv --nodes stock/dealer.csv --relationships stock/person_stock.csv --relationships stock/stock_industry.csv --relationships stock/stock_concept.csv --relationships stock/stock_st.csv --relationships stock/dealer_stock.csv
 ```
 
 `mydatabase`為我自己命名資料庫的名字，可以更改
@@ -181,6 +181,7 @@ employ_of粗細為該董監持股數除以全部董監持股數
 - https://github.com/neo4j-contrib/neovis.js
 - https://medium.com/neo4j/graph-visualization-with-neo4j-using-neovis-js-a2ecaaa7c379
 - https://www.lyonwj.com/blog/graph-of-thrones-neo4j-social-network-analysis
+- https://stackoverflow.com/questions/23310114/how-to-reset-clear-delete-neo4j-database
 
 ---
 
