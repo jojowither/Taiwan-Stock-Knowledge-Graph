@@ -146,6 +146,33 @@ def build_concept(concept_prep, concept_import):
     print('- done.')
 
 
+def bulid_dealer(dealer_prep, dealer_import):
+    """
+    Create an 'dealer' file in csv format that can be imported into Neo4j.
+    format -> dealer_id:ID,name,:LABEL
+    label -> Dealer
+    """
+    print(f'Writing to {dealer_prep.name} file...')
+    with open(dealer_prep, 'r', encoding='utf-8') as file_prep, \
+            open(dealer_import, 'w', encoding='utf-8') as file_import:
+        file_prep_csv = csv.reader(file_prep, delimiter=',')
+        file_import_csv = csv.writer(file_import, delimiter=',')
+
+        headers = ['dealer_id:ID', 'name', ':LABEL']
+        file_import_csv.writerow(headers)
+        dealers = set()
+        for i, row in enumerate(file_prep_csv):
+            if i == 0:
+                continue
+            dealers.add(row[0])
+        for dealer in dealers:
+            # generate md5 according to 'name'
+            dealer_id = get_md5(dealer)
+            info = [dealer_id, dealer, 'Dealer']
+            file_import_csv.writerow(info)
+    print('- done.')
+
+
 def build_person_stock(executive_prep, relation_import):
     """Create an 'person_stock' file in csv format that can be imported into Neo4j.
     format -> :START_ID,job,stock_num,:END_ID,:TYPE
@@ -250,6 +277,30 @@ def build_stock_concept(concept_prep, relation_import):
     print('- done.')
 
 
+def build_dealer_stock(executive_prep, relation_import):
+    """Create an 'dealer_stock' file in csv format that can be imported into Neo4j.
+    format -> :START_ID,amount,:END_ID,:TYPE
+               dealer           stock
+    type -> buy_or_sell
+    """
+    print(f'Writing to {relation_import.name} file...')
+    with open(executive_prep, 'r', encoding='utf-8') as file_prep, \
+            open(relation_import, 'w', encoding='utf-8') as file_import:
+        file_prep_csv = csv.reader(file_prep, delimiter=',')
+        file_import_csv = csv.writer(file_import, delimiter=',')
+        headers = [':START_ID', 'amount:int', ':END_ID', ':TYPE']
+        file_import_csv.writerow(headers)
+
+        for i, row in enumerate(file_prep_csv):
+            if i == 0:
+                continue
+            start_id = get_md5(row[0])
+            end_id = row[1]  # code
+            relation = [start_id, row[2], end_id, 'buy_or_sell']
+            file_import_csv.writerow(relation)
+    print('- done.')
+
+
 if __name__ == '__main__':
     prep_path = '../data/'
     import_path = '../data/import'
@@ -267,6 +318,8 @@ if __name__ == '__main__':
                    Path(import_path)/'industry.csv')
     build_concept(Path(prep_path)/'concept_prep.csv',
                   Path(import_path)/'concept.csv')
+    bulid_dealer(Path(prep_path)/'dealer_prep.csv',
+                  Path(import_path)/'dealer.csv')
 
     # Relation
     build_person_stock(Path(prep_path)/'executive_prep.csv',
@@ -277,3 +330,6 @@ if __name__ == '__main__':
                          Path(import_path)/'stock_industry.csv')
     build_stock_concept(Path(prep_path)/'concept_prep.csv',
                         Path(import_path)/'stock_concept.csv')
+    build_dealer_stock(Path(prep_path)/'dealer_prep.csv',
+                       Path(import_path)/'dealer_stock.csv')
+    
