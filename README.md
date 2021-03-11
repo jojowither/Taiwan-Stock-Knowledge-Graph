@@ -18,18 +18,20 @@ Welcome to watch, star or fork.
 
 ![](stock_kg_structure.png)
 
-目前定義有五種實體：
+目前定義有六種實體：
 - **Person**表示董監，從[永豐金證券-董監持股](https://www.sinotrade.com.tw/Stock/Stock_3_1/Stock_3_1_6_2?ticker=)抽取出
 - **Stock**所有證券的名字，代號，從[twstock](https://github.com/mlouielu/twstock)抽取出，屬性未來可能會加上股價、漲跌
 - **StockType**表示股票、ETF、權證等等，從[twstock](https://github.com/mlouielu/twstock)抽取出
 - **Industry**表示產業類別，如半導體業、航運業等等，從[twstock](https://github.com/mlouielu/twstock)抽取出
 - **Concept**表示概念股，如台積電有多個概念股，如5G、APPLE概念股等等，從[Pchome股市概念股](https://pchome.megatime.com.tw/group/sto3)抽取出
+- **Dealer**表示券商/主力得分點，如隔日沖券商 美林、元大-土城永寧、國票-敦北法人等等，從[永豐金證券-主力進出](https://www.sinotrade.com.tw/Stock/Stock_3_1/Stock_3_1_6_7?ticker=)抽取出
 
-四種關聯:
+五種關聯:
 - **employ_of**表示董監/大股東跟該股票的關係，屬性有職位以及持股張數，從[永豐金證券-董監持股](https://www.sinotrade.com.tw/Stock/Stock_3_1/Stock_3_1_6_2?ticker=)抽取出
 - **type_of**表示該股票屬於何種類型
 - **industry_of**表示該股票屬於何種行業
 - **concept_of**表示該股票有哪些概念股
+- **buy_or_sell**表示券商對該股票的買賣超，正值為買超，負值為賣超
 
 查詢schema，啟動neo4j後
 ```cypher
@@ -47,10 +49,11 @@ cd src
 python get_stock_info.py
 python get_executive.py
 python get_concept_stock.py
+python get_dealer.py
 ```
 
 
-以上三句是建構初始資料集，Neo4j需要再針對以上資料集生成對應的格式，可以理解為上面實體關聯關係圖的所有實體關聯，我們都要為他們建立一個檔案，上面實體關聯總共有9種，所以要有9個檔案。對於格式要求可以參考 https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/
+以上是建構初始資料集，Neo4j需要再針對以上資料集生成對應的格式，可以理解為上面實體關聯關係圖的所有實體關聯，我們都要為他們建立一個檔案，上面實體關聯總共有11種，所以要有11個檔案。對於格式要求可以參考 https://neo4j.com/docs/operations-manual/current/tutorial/neo4j-admin-import/
 
 
 建立Neo4j可接受的格式：
