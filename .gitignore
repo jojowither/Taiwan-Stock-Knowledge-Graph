@@ -4,3 +4,4 @@ src/ghostdriver.log
 .vscode/settings.json
 stock_kg_structure.drawio
 src/flask.log
+flask.log
