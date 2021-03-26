@@ -152,6 +152,27 @@ pip install py2neo
 
 ---
 
+## Web Application
+
+- Application Type: Python-Web Application
+- Web framework: Flask (Micro-Webframework)
+- Neo4j Database Connector: Neo4j Python Driver for Cypher Docs
+- Database: Neo4j-Server (4.x)
+- Frontend: jquery, bootstrap, d3.js
+
+### Run locally
+```bash
+python run.py
+```
+
+### TODO
+
+- [ ] neo4j query的api
+- [ ] 前端graph的視覺化
+
+
+---
+
 ## 自定義視覺化
 [neovis](https://github.com/neo4j-contrib/neovis.js)
 
@@ -191,4 +212,4 @@ employ_of粗細為該董監持股數除以全部董監持股數
 ---
 
 ## Acknowledgement
-感謝[adsl8212](https://github.com/adsl8212)協助爬蟲
+感謝[adsl8212](https://github.com/adsl8212)協助爬蟲與JS
