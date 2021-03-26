@@ -40,7 +40,7 @@
 </div>
 
 <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-7">
         <div class="panel panel-default">
             <div class="panel-heading">搜尋結果</div>
             <table id="results" class="table table-striped table-hover">
@@ -57,7 +57,7 @@
             </table>
         </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-5">
         <div class="panel panel-default">
             <div class="panel-heading" id="stock">Details</div>
             <div class="row">
@@ -93,7 +93,7 @@
                     }, "json");
             return false;
         }
-        // showExecutive('2330')
+
         function search() {
             const query=$("#search").find("input[name=search]").val();
             $.get("/search?q=" + encodeURIComponent(query),
