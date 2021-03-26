@@ -154,6 +154,8 @@ pip install py2neo
 
 ## Web Application
 
+![](kg4.png)
+
 - Application Type: Python-Web Application
 - Web framework: Flask (Micro-Webframework)
 - Neo4j Database Connector: Neo4j Python Driver for Cypher Docs
@@ -170,7 +172,6 @@ python run.py
 - [ ] neo4j query的api
 - [ ] 前端graph的視覺化
 
-![](kg4.png)
 
 ---
 
