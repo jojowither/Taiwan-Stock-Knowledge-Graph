@@ -170,6 +170,7 @@ python run.py
 - [ ] neo4j query的api
 - [ ] 前端graph的視覺化
 
+![](kg4.png)
 
 ---
 
