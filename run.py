@@ -61,9 +61,43 @@ def get_executive(stock):
                     mimetype="application/json")
 
 
-## TODO
-# @app.route("/graph")
-# def get_graph():
+
+## 希望跟查詢連動，跳出來的是，查詢股票的所有董事、概念股、產業別、以及買賣分點
+@app.route("/graph")
+def get_graph():
+    try:
+        q = request.args["q"]
+    except KeyError:
+        return []
+    else:
+        query = f'''
+                MATCH (s:Stock{{code:'{q}'}}) 
+                MATCH p=(s)-[rels]-(others)
+                RETURN s, rels, others
+                '''
+
+        results = graph.run(query).data()
+
+
+        nodes = []
+        rels = []
+        target = 1
+        nodes.append({"name": results[0]['s']['name'], 
+                      "label": set(results[0]['s'].labels).pop()})
+
+        for result in results:
+            nodes.append({"name": result['others']['name'], 
+                          "label": set(result['others'].labels).pop()})
+            rels.append({"source": 0, "target": target})
+            target += 1
+            
+
+        # type(results[0]['rels']).__name__
+
+
+    return Response(dumps({"nodes": nodes, "links": rels}),
+                    mimetype="application/json")
+
 
 
 if __name__ == '__main__':
