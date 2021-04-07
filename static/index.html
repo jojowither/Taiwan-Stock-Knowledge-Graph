@@ -150,7 +150,7 @@
 
             // html title attribute
             node.append("title")
-                    .text(function (d) { return d.title; })
+                    .text(function (d) { return d.name; })
 
             // force feed algo ticks
             force.on("tick", function() {
