@@ -210,6 +210,8 @@ employ_of粗細為該董監持股數除以全部董監持股數
 - https://medium.com/neo4j/graph-visualization-with-neo4j-using-neovis-js-a2ecaaa7c379
 - https://www.lyonwj.com/blog/graph-of-thrones-neo4j-social-network-analysis
 - https://stackoverflow.com/questions/23310114/how-to-reset-clear-delete-neo4j-database
+- https://github.com/nicolewhite/neo4j-flask
+- https://github.com/neo4j-examples/movies-python-bolt
 
 ---
 
