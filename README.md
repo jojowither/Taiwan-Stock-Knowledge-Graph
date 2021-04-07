@@ -148,7 +148,7 @@ pip install py2neo
 
 ...等等
 
-詳細請查看 `src/test.ipynb`
+詳細請查看 `src/cypher_script.ipynb`
 
 ---
 
@@ -169,8 +169,9 @@ python run.py
 
 ### TODO
 
-- [ ] neo4j query的api
-- [ ] 前端graph的視覺化
+- [x] neo4j query的api
+- [x] 前端graph的視覺化
+- [ ] 把前端頁面弄得更細緻
 
 
 ---
@@ -212,6 +213,7 @@ employ_of粗細為該董監持股數除以全部董監持股數
 - https://stackoverflow.com/questions/23310114/how-to-reset-clear-delete-neo4j-database
 - https://github.com/nicolewhite/neo4j-flask
 - https://github.com/neo4j-examples/movies-python-bolt
+- https://observablehq.com/@xianwu/force-directed-graph-network-graph-with-arrowheads-and-lab
 
 ---
 
