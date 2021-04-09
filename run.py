@@ -63,6 +63,9 @@ def get_executive(stock):
 
 
 ## 希望跟查詢連動，跳出來的是，查詢股票的所有董事、概念股、產業別、以及買賣分點
+## 改回傳格式
+## node: id, name, lable(entity type), pageranke(todo)
+## link: source, target, type
 @app.route("/graph")
 def get_graph():
     try:
@@ -81,19 +84,19 @@ def get_graph():
 
         nodes = []
         rels = []
-        target = 1
-        nodes.append({"name": results[0]['s']['name'], 
+        _id = 1
+        nodes.append({"id": 0,
+                      "name": results[0]['s']['name'], 
                       "label": set(results[0]['s'].labels).pop()})
 
         for result in results:
-            nodes.append({"name": result['others']['name'], 
+            nodes.append({"id": _id,
+                          "name": result['others']['name'], 
                           "label": set(result['others'].labels).pop()})
-            rels.append({"source": 0, "target": target})
-            target += 1
-            
-
-        # type(results[0]['rels']).__name__
-
+            rels.append({"source": 0, 
+                         "target": _id,
+                         "type":type(result['rels']).__name__})
+            _id += 1
 
     return Response(dumps({"nodes": nodes, "links": rels}),
                     mimetype="application/json")
