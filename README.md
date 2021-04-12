@@ -171,7 +171,7 @@ python run.py
 
 - [x] neo4j query的api
 - [x] 前端graph的視覺化
-- [ ] 把前端頁面弄得更細緻
+- [x] 把前端頁面弄得更細緻
 
 
 ---
