@@ -27,7 +27,7 @@ def init_driver():
 
 
 def get_all_concept(driver):
-    concepts = driver.find_element_by_xpath(ALL_CONCEPT_XPATH)
+    concepts = driver.find_element("xpath", ALL_CONCEPT_XPATH)
     concepts = concepts.text.split('\n')
     return concepts
 
@@ -37,20 +37,20 @@ def click_concept_button(concept_idx, driver):
     cur_url = driver.current_url
     # wait the driver to click button
     while True:
-        driver.find_element_by_xpath(concepts_xpath).click()
+        driver.find_element("xpath", concepts_xpath).click()
         if driver.current_url != cur_url:
             break
     return concepts_xpath
 
 
 def get_all_subpages(driver, concepts_xpath):
-    select = Select(driver.find_element_by_xpath(SELECT_XPATH))
+    select = Select(driver.find_element("xpath", SELECT_XPATH))
     subpages = [opt.text for opt in select.options]
     return select, subpages
 
 
 def get_stock_table(driver):
-    indiv_concept_table = driver.find_element_by_xpath(
+    indiv_concept_table = driver.find_element("xpath", 
         INDIV_CONCEPT_XPATH).get_attribute('outerHTML')
     indiv_concept_table = pd.read_html(indiv_concept_table)[0]
     stocks = indiv_concept_table['股票▲'].tolist()
@@ -62,7 +62,7 @@ def construct_concept_df(stocks, concept, concept_df):
         stock_code = filter_code(stock)
         concept_dict = {'concept': concept,
                         'stock': stock_code}
-        concept_df = concept_df.append(concept_dict, ignore_index=True)
+        concept_df = pd.concat([concept_df, pd.DataFrame([concept_dict])], ignore_index=True)
     return concept_df
 
 
@@ -86,7 +86,7 @@ def main():
         for page_idx, opt in enumerate(subpages):
             if page_idx != 0:
                 select.select_by_value(opt)
-                select = Select(driver.find_element_by_xpath(SELECT_XPATH))
+                select = Select(driver.find_element("xpath", SELECT_XPATH))
                 # time.sleep(5)
 
             stocks = get_stock_table(driver)

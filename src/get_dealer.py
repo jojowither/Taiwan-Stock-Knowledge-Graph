@@ -30,7 +30,7 @@ def main():
 
             xpath = '//*[@id="oMainTable"]'
             try:
-                tbl = driver.find_element_by_xpath(
+                tbl = driver.find_element("xpath", 
                     xpath).get_attribute('outerHTML')
             except:
                 continue
@@ -51,14 +51,14 @@ def main():
                     buy_dict = {'dealer': buy_dealer,
                             'code': twstock_code,
                             'BuySell': buy_amount}
-                    dealer_df = dealer_df.append(buy_dict, ignore_index=True)
+                    dealer_df = pd.concat([dealer_df, pd.DataFrame([buy_dict])], ignore_index=True)
                 if pd.notnull(series[sell_dealer_idx]):
                     sell_dealer = series[sell_dealer_idx]
                     sell_amount = int(series[sell_idx])
                     sell_dict = {'dealer': sell_dealer,
                             'code': twstock_code,
                             'BuySell': -sell_amount}
-                    dealer_df = dealer_df.append(sell_dict, ignore_index=True)
+                    dealer_df = pd.concat([dealer_df, pd.DataFrame([sell_dict])], ignore_index=True)
 
     dealer_df.to_csv('../data/dealer_prep.csv', encoding='utf-8', index=False)
     print('\nDone')

@@ -27,24 +27,21 @@ def main():
             url = f'{stock_web_url}{twstock_code}'
             driver.get(url)
             driver.switch_to.frame('SysJustIFRAME')
-            xpath = '//*[@id="SysJustIFRAMEDIV"]/table/tbody/tr[2]/td[2]/center/table/tbody/tr[1]/td/table'
-            tbl = driver.find_element_by_xpath(
-                xpath).get_attribute('outerHTML')
+            
+            try:
+                tbl = driver.find_element("class name", 't0').get_attribute('outerHTML')
+            except:
+                continue
             df = pd.read_html(tbl)[0]
             size = df.shape
 
-            for idx in range(2, size[0]-1):
-                row = df.iloc[idx]
-                job = row[0]
-                name = row[1]
-                stock_num = row[2]
-
-                executive_dict = {'name': name,
-                                  'code': twstock_code,
-                                  'job': job,
-                                  'stock_num': stock_num}
-                executive_df = executive_df.append(
-                    executive_dict, ignore_index=True)
+            # remove the noise from table and get the specific columns
+            df = df.iloc[2:size[0]-1][[0, 1, 2]]
+            # rename the specific columns
+            df.rename(columns={0: 'job', 1: 'name', 2: 'stock_num'}, inplace=True)
+            df['code'] = twstock_code
+            df = df[['name', 'code', 'job', 'stock_num']]
+            executive_df = pd.concat([executive_df, df], ignore_index=True)
 
     executive_df.to_csv('../data/executive_prep.csv', encoding='utf-8', index=False)
     print('\nDone')
