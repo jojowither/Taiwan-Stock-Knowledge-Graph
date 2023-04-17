@@ -112,7 +112,7 @@ python build_import_csv.py
 ### Installation
 Version: Neo4j 4.2.2 
 
-關於Neo4j的安裝啟動，建議直接從[官方文件](https://neo4j.com/docs/operations-manual/current/)閱讀起 
+關於Neo4j的安裝啟動，建議直接從[官方文件1](https://neo4j.com/docs/operations-manual/current/)以及[官方文件2](https://neo4j.com/docs/operations-manual/current/installation/linux/debian/#debian-installation)閱讀起 
 
 這裡提供快速教學
 
@@ -142,6 +142,15 @@ sudo ln -sfn /usr/local/opt/openjdk@11/libexec/openjdk.jdk /Library/Java/JavaVir
 
 and then visit `http://localhost:7474`，接著更改預設密碼
 
+### Linux remote setting
+
+```bash
+cd /etc/neo4j
+sudo vim neo4j.conf
+# 將這句註解拿掉 server.default_listen_address=0.0.0.0
+```
+
+ref: https://neo4j.com/docs/operations-manual/current/configuration/file-locations/
 
 ### Neo4j Graph Data Science (GDS) 
 
@@ -154,16 +163,17 @@ and then visit `http://localhost:7474`，接著更改預設密碼
 ### 生成圖譜
 
 ```bash
-cd $NEO4J_HOME/bin
-./neo4j-admin import --id-type=STRING --database=mydatabase --nodes stock/person.csv --nodes stock/stock.csv --nodes stock/stock_type.csv --nodes stock/concept.csv --nodes stock/industry.csv --nodes stock/dealer.csv --relationships stock/person_stock.csv --relationships stock/stock_industry.csv --relationships stock/stock_concept.csv --relationships stock/stock_st.csv --relationships stock/dealer_stock.csv
+cd data/
+sudo neo4j-admin database import full --nodes=import/person.csv --nodes=import/stock.csv --nodes=import/stock_type.csv --nodes=import/concept.csv --nodes=import/industry.csv --nodes=import/dealer.csv --relationships=import/person_stock.csv --relationships=import/stock_industry.csv --relationships=import/stock_concept.csv --relationships=import/stock_st.csv --relationships=import/dealer_stock.csv --overwrite-destination=true neo4j
 ```
 
-`mydatabase`為我自己命名資料庫的名字，可以更改
+最後面`neo4j`為預設資料庫的名字
 
-目前上傳的資料集差不多是在2021/1/21前後的資訊，如果需要最新資訊可以回到[資料集建構](##資料集建構)，去爬下最新的資料。
-**而券商進出的資訊是2021/3/10的資料**，未來預計補上券商在各日期的進出資訊。
+目前上傳的資料集差不多是在2023/4/17前後的資訊，如果需要最新資訊可以回到[資料集建構](##資料集建構)，去爬下最新的資料。
 
-**注意**，把`data/import`整個資料夾放到`$NEO4J_HOME/bin`裡，我自己是有再將資料夾重新命名為`stock`
+**注意**，若使用community版本import資料失敗，可去`/var/lib/neo4j/data/databases`和`/var/lib/neo4j/data/transactions`中刪除欲創建的資料庫，此例資料庫名稱為`neo4j`，刪除成功後再重新執行上面指令。
+
+**注意2**，若資料import成功但browser無法正確顯示資訊，則重啟neo4j試試，`sudo neo4j restart`
 
 ---
 
