@@ -10,13 +10,13 @@
 
 Welcome to watch, star or fork.
 
-![](kg1.png)
+![](img/kg1.png)
 
 ---
 
 ## 實體關聯定義
 
-![](stock_kg_structure.png)
+![](img/stock_kg_structure.png)
 
 目前定義有六種實體：
 - **Person**表示董監，從[永豐金證券-董監持股](https://www.sinotrade.com.tw/Stock/Stock_3_1/Stock_3_1_6_2?ticker=)抽取出
@@ -37,8 +37,49 @@ Welcome to watch, star or fork.
 ```cypher
 CALL db.schema.visualization()
 ```
-![](kg_schema.png)
+![](img/kg_schema.png)
 
+
+---
+## 套件安裝
+
+### python套件安裝
+
+```bash
+pip install -r requirements.txt
+```
+
+### 在linux中使用selenium
+
+1. install Chrome Binary
+
+```bash
+# Install Chrome.
+sudo curl -sS -o - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add
+sudo echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list
+# Update our system
+sudo apt-get -y update
+# Install Chrome
+sudo apt-get -y install google-chrome-stable
+```
+
+2. install Chrome Driver
+```bash
+# Install Chromedriver
+wget -N https://chromedriver.storage.googleapis.com/112.0.5615.28/chromedriver_linux64.zip -P ~/
+unzip ~/chromedriver_linux64.zip -d ~/
+# Remove zip file
+rm ~/chromedriver_linux64.zip
+# Move driver to bin location
+sudo mv -f ~/chromedriver /usr/local/bin/chromedriver
+# Give it rights
+sudo chown root:root /usr/local/bin/chromedriver
+sudo chmod 0755 /usr/local/bin/chromedriver
+```
+
+上面 112.0.5615.28為driver版本，可以透過該網站選擇需求的driver版本
+
+ref: https://stackoverflow.com/questions/68283578/how-can-i-run-selenium-on-linux
 
 ---
 
@@ -154,7 +195,7 @@ pip install py2neo
 
 ## Web Application
 
-![](kg4.png)
+![](img/kg4.png)
 
 - Application Type: Python-Web Application
 - Web framework: Flask (Micro-Webframework)
@@ -198,8 +239,8 @@ Person size為Person與Stock的pagerank，color為Person與Stock的community det
 
 employ_of粗細為該董監持股數除以全部董監持股數
 
-![](kg2.png)
-![](kg3.png)
+![](img/kg2.png)
+![](img/kg3.png)
 
 ---
 
