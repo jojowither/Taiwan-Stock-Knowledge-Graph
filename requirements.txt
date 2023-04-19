@@ -3,3 +3,6 @@ twstock
 selenium
 tqdm
 lxml
+py2neo
+cmake
+igraph

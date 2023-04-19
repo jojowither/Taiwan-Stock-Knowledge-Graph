@@ -130,7 +130,7 @@ cd $NEO4J_HOME/bin
 ./neo4j console
 ```
 
-我是用Mac，如果出現
+用Mac如果出現
 Unable to find any JVMs matching version "11".
 No Java runtime present, try --request to install.
 參考 https://community.neo4j.com/t/unable-to-find-any-jvms-matching-version-11/18183/3
@@ -145,8 +145,7 @@ and then visit `http://localhost:7474`，接著更改預設密碼
 ### Linux remote setting
 
 ```bash
-cd /etc/neo4j
-sudo vim neo4j.conf
+sudo vim /etc/neo4j/neo4j.conf
 # 將這句註解拿掉 server.default_listen_address=0.0.0.0
 ```
 
@@ -157,6 +156,37 @@ ref: https://neo4j.com/docs/operations-manual/current/configuration/file-locatio
 安裝圖演算法套件
 
 參考 https://neo4j.com/docs/graph-data-science/current/installation/
+
+
+### Neo4j APOC 安裝
+
+#### APOC Core
+
+APOC Core can be installed by moving the APOC jar file from the `$NEO4J_HOME/labs` directory to the `$NEO4J_HOME/plugins` directory and restarting Neo4j.
+
+若`$NEO4J_HOME/labs`沒檔案，可以用下載的方式，如下
+
+```bash
+sudo curl https://github.com/neo4j-contrib/neo4j-apoc-procedures/releases/download/5.6.0/apoc-5.6.0-extended.jar -o /var/lib/neo4j/plugins/apoc-5.6.0-extended.jar -L
+sudo curl https://github.com/neo4j/apoc/releases/download/5.6.0/apoc-5.6.0-core.jar -o /var/lib/neo4j/plugins/apoc-5.6.0-core.jar -L
+sudo neo4j restart
+```
+
+若做完以上流程進到cypher shell無法執行`call apoc.help('apoc')`，可以調整`/etc/neo4j/neo4j.conf`檔案
+
+```bash
+sudo vim /etc/neo4j/neo4j.conf
+```
+
+註解掉並添加`dbms.security.procedures.allowlist=apoc.coll.*,apoc.load.*,gds.*,apoc.*`
+
+以及註解掉並添加`dbms.security.procedures.unrestricted=apoc.*`
+
+ref
+- https://neo4j.com/labs/apoc/4.4/installation/ 
+- https://stackoverflow.com/questions/42740355/how-to-install-apoc-for-neo4j
+
+
 
 ---
 
