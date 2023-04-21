@@ -6,10 +6,10 @@ from logging import FileHandler
 from flask import Flask, g, Response, request
 from py2neo import Graph
 
-app = Flask(__name__, static_url_path='/static/')
+app = Flask(__name__, static_url_path='.')
 
 url = 'bolt://127.0.0.1:7687'
-password = 'jojo'
+password = 'neo4jneo4j'
 graph = Graph(url, password=password)
 
 
@@ -108,4 +108,4 @@ if __name__ == '__main__':
     handler = logging.FileHandler('flask.log')
     app.logger.addHandler(handler)
     app.logger.info('Running the graph database at %s', url)
-    app.run()
+    app.run(host='0.0.0.0')

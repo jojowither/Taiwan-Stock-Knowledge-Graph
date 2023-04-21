@@ -245,6 +245,7 @@ pip install py2neo
 
 ### Run locally
 ```bash
+cd static/
 python run.py
 ```
 
@@ -266,7 +267,7 @@ cd $NEO4J_HOME/bin
 ./neo4j console
 ```
 
-開啟`index.html`，記得把config改成自己的帳號密碼
+開啟`cus_vis.html`，記得把config改成自己的帳號密碼
 
 這裡自定義的視覺化為使用graph algorithms，只畫出股票及董事之間的關係。
 ```bash
