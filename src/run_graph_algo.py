@@ -6,7 +6,7 @@ from py2neo import Graph
 
 URL = 'bolt://localhost:7687'
 USER = "neo4j" # Default by neo4j
-PASSWORD = 'jojo'
+PASSWORD = 'neo4jneo4j'
 
 
 def time_count_wrapper(func):
