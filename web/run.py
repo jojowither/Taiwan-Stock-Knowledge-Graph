@@ -7,7 +7,6 @@ from fastapi import FastAPI, Response, Request, APIRouter
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
-
 import uvicorn
 from py2neo import Graph
 
@@ -31,7 +30,6 @@ def serialize_exec(executive):
 @app.get("/")
 async def home(request: Request):
 	return templates.TemplateResponse("index.html",{"request":request})
-
 
 
 @app.get("/search")
@@ -64,10 +62,6 @@ async def get_executive(stock: str):
                     media_type="application/json")
 
 
-## 希望跟查詢連動，跳出來的是，查詢股票的所有董事、概念股、產業別、以及買賣分點
-## 改回傳格式
-## node: id, name, lable(entity type), pageranke(todo)
-## link: source, target, type
 @app.get("/graph")
 async def get_graph(q: str):
     query = f'''
