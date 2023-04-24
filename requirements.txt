@@ -6,3 +6,5 @@ lxml
 py2neo
 cmake
 igraph
+fastapi
+openai

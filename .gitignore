@@ -5,3 +5,4 @@ src/ghostdriver.log
 stock_kg_structure.drawio
 flask.log
 import.report
+__pycache__

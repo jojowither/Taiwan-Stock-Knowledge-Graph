@@ -245,8 +245,8 @@ pip install py2neo
 
 ### Run locally
 ```bash
-cd static/
-python run.py
+cd web/
+uvicorn run:app --reload --host 0.0.0.0
 ```
 
 ### TODO
