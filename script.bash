@@ -1,1 +1,0 @@
-./neo4j-admin import --id-type=STRING --database=mydatabase --nodes stock/person.csv --nodes stock/stock.csv --nodes stock/stock_type.csv --nodes stock/concept.csv --nodes stock/industry.csv --relationships stock/person_stock.csv --relationships stock/stock_industry.csv --relationships stock/stock_concept.csv --relationships stock/stock_st.csv
