@@ -6,3 +6,4 @@ stock_kg_structure.drawio
 flask.log
 import.report
 __pycache__
+.env
