@@ -8,4 +8,5 @@ cmake
 igraph
 fastapi
 openai
+streamlit
 streamlit-chat 

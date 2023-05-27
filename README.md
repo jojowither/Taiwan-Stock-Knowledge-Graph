@@ -1,6 +1,6 @@
-# Taiwan Stock Knowledge Graph
+# Taiwan Stock Knowledge Graph with ChatGPT
 
-爬取公開資料集並使用Neo4j建構台灣股市的知識圖譜
+爬取公開資料集並使用Neo4j建構台灣股市的知識圖譜，並將此知識圖譜作為ChatGPT的知識庫。
 
 公開資料集/相關股票套件有
 
@@ -11,6 +11,8 @@
 Welcome to watch, star or fork.
 
 ![](img/kg1.png)
+
+![](img/NeoGPT_sample.png)
 
 ---
 
@@ -249,11 +251,6 @@ cd web/
 uvicorn run:app --reload --host 0.0.0.0
 ```
 
-### TODO
-
-- [x] neo4j query的api
-- [x] 前端graph的視覺化
-- [x] 把前端頁面弄得更細緻
 
 
 ---
@@ -285,6 +282,30 @@ employ_of粗細為該董監持股數除以全部董監持股數
 
 ---
 
+## ChatGPT
+
+整體流程如下
+
+![](img/ChatBot_flow.png)
+
+使用streamlit作為與ChatGPT對話的介面
+
+首先須將`.env.example`內的參數改成自己的，並更名為`.env`
+
+執行以下指令
+
+```bash
+# 確認neo4j有啟動
+sudo neo4j restart
+streamlit run main.py --server.address=0.0.0.0
+```
+
+
+此外，`chat_app/training.py`為作為ChatGPT學習neo4j的提示工程，若要達到更好的對話或查詢效果，除了更改openai model以外，也可以撰寫更完整的提示。
+
+
+---
+
 ## Reference
 
 - https://github.com/lemonhu/stock-knowledge-graph
@@ -296,8 +317,5 @@ employ_of粗細為該董監持股數除以全部董監持股數
 - https://github.com/nicolewhite/neo4j-flask
 - https://github.com/neo4j-examples/movies-python-bolt
 - https://observablehq.com/@xianwu/force-directed-graph-network-graph-with-arrowheads-and-lab
+- https://medium.com/neo4j/context-aware-knowledge-graph-chatbot-with-gpt-4-and-neo4j-d3a99e8ae21e
 
----
-
-## Acknowledgement
-感謝[adsl8212](https://github.com/adsl8212)協助爬蟲與JS
